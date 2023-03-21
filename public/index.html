@@ -28,8 +28,8 @@
       </div>
     </nav>
     <div class="container-fluid">
-    <button type="button" class="btn btn-primary mt-4 ml-5 mb-5" style="display: flex; justify-items: end; align-items: end;" data-toggle="modal" data-target="#addWeekModal">+ Añadir Semana</button>
-      <div class="row" id="weekContainer">
+    <button type="button" class="btn btn-primary mt-4 ml-5 mb-5" style="display: flex; justify-items: end; align-items: end;" data-toggle="modal" data-target="#addWeekModal">+ Añadir Semana</button>  
+    <div class="row" id="weekContainer">
       <!-- Container donde se irán almacenando las tarjetas que se generen mediante el formulario, como en el enunciado
           se solicita explicitamente que se muestren algunos datos introducidos a mano, añadiremos tres tarjetas estáticas
           que estarán aquí siempre que refresques la página (aún y si las eliminas).
@@ -44,7 +44,7 @@
                 <p class="card-text"><strong>Fecha inicio:</strong> 2023-08-16</p>
                 <p class="card-text"><strong>Fecha fin:</strong>2023-08-23</p>
                 <button class="btn btn-primary"> Acceder </button>
-                <button class="btn btn-danger" data-toggle="modal" data-target="#confirm-modal" style="margin-left: 394px;"> Eliminar </button>
+                <button class="btn btn-danger" onClick="deleteWeek(this.parentNode.parentNode.parentNode)"> Eliminar </button>
             </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
               <p class="card-text"><strong>Fecha inicio:</strong> 2023-10-01</p>
               <p class="card-text"><strong>Fecha fin:</strong> 2023-10-06</p>
               <button class="btn btn-primary"> Acceder </button>
-              <button class="btn btn-danger" data-toggle="modal" data-target="#confirm-modal" style="margin-left: 394px;"> Eliminar </button>
+              <button class="btn btn-danger" onClick="deleteWeek(this.parentNode.parentNode.parentNode)"> Eliminar </button>
           </div>
       </div>
     </div>
@@ -72,7 +72,7 @@
               <p class="card-text"><strong>Fecha inicio:</strong> 2023-04-10</p>
               <p class="card-text"><strong>Fecha fin:</strong> 2023-04-16</p>
               <button class="btn btn-primary"> Acceder </button>
-              <button class="btn btn-danger"  data-toggle="modal" data-target="#confirm-modal" style="margin-left: 394px;"> Eliminar </button>
+              <button class="btn btn-danger" onClick="deleteWeek(this.parentNode.parentNode.parentNode)"> Eliminar </button>
           </div>
       </div>
     </div>
@@ -123,11 +123,6 @@
 </div>
 
     <!-- Modal de confirmación -->
-<div class="modal-footer" id="confirm-modal">
-  <button id="confirm-yes" class="btn btn-danger">Sí</button>
-  <button id="confirm-no" class="btn btn-secondary">No</button>
-</div>
-
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

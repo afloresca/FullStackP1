@@ -51,7 +51,7 @@ btnAddWeek.addEventListener('click', function () {
                     <p class="card-text"><strong>Fecha inicio:</strong> ${fechaInicio.value}</p>
                     <p class="card-text"><strong>Fecha fin:</strong> ${fechaFin.value}</p>
                     <button class="btn btn-primary"> Acceder </button>
-                    <button class="btn btn-danger" id="deleteBtn" style="margin-left: 394px;" onClick="deleteWeek(this.parentNode.parentNode.parentNode)"> Eliminar </button>
+                    <button class="btn btn-danger" onClick="deleteWeek(this.parentNode.parentNode.parentNode)"> Eliminar </button>
                 </div>
             </div>
         `;
@@ -69,21 +69,8 @@ btnAddWeek.addEventListener('click', function () {
     }
 })
 
-
-
-
-confirmTrueBtn.addEventListener('click', (week) => {
-  week.remove();
-  $('#confirm-modal').modal('hide');
-});
-
-confirmFalseBtn.addEventListener('click', () => {
-  $('#confirm-modal').modal('hide');
-});
-
-
-
 // Añadimos función para eliminar las tarejetas.
 function deleteWeek(week) {
     week.remove();
+    $('#confirmModal').modal('hide');
 }
