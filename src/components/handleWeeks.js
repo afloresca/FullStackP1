@@ -19,6 +19,12 @@ let fechaInicio = document.getElementById("fecha-inicio");
 let fechaFin = document.getElementById("fecha-fin");
 let color = document.getElementById("color");
 
+// Recogemos los datos relativos al modal de confirmación
+let deleteBtn = document.getElementById("deleteBtn");
+let confirmModal = document.getElementById("confirm-modal");
+let confirmTrueBtn = document.getElementById("confirm-yes");
+let confirmFalseBtn = document.getElementById("confirm-no");
+
 // Añadimos el "listener" para que cada vez que se haga click enel botón "Añadir" se ejecute la siguiente funcion
 btnAddWeek.addEventListener('click', function () {
 
@@ -45,7 +51,7 @@ btnAddWeek.addEventListener('click', function () {
                     <p class="card-text"><strong>Fecha inicio:</strong> ${fechaInicio.value}</p>
                     <p class="card-text"><strong>Fecha fin:</strong> ${fechaFin.value}</p>
                     <button class="btn btn-primary"> Acceder </button>
-                    <button class="btn btn-danger" style="margin-left: 394px;" onClick="deleteWeek(this.parentNode.parentNode.parentNode)"> Eliminar </button>
+                    <button class="btn btn-danger" id="deleteBtn" style="margin-left: 394px;" onClick="deleteWeek(this.parentNode.parentNode.parentNode)"> Eliminar </button>
                 </div>
             </div>
         `;
@@ -63,14 +69,19 @@ btnAddWeek.addEventListener('click', function () {
     }
 })
 
-function validarFormulatio() {
-    
-    if(nombreSemana.value === '' || color.value === '' || fechaInicio.value === '' || fechaFin.value === '') {
-        alert('Debes rellenar todos los campos obligarorios');
-        return false;
-    }
 
-}
+
+
+confirmTrueBtn.addEventListener('click', (week) => {
+  week.remove();
+  $('#confirm-modal').modal('hide');
+});
+
+confirmFalseBtn.addEventListener('click', () => {
+  $('#confirm-modal').modal('hide');
+});
+
+
 
 // Añadimos función para eliminar las tarejetas.
 function deleteWeek(week) {
