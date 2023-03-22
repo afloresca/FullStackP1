@@ -69,8 +69,33 @@ btnAddWeek.addEventListener('click', function () {
     }
 })
 
+// Modal de confirmación --> No muestra su contenido (Black window).
+
+// Seleccionar el botón de confirmación
+// var confirmButton = document.getElementById("confirm");
+
+// Añadir un event listener al botón de confirmación
+// confirmButton.addEventListener("click", function() {
+  // Eliminamos el elemento
+ // this.parentNode.parentNode.parentNode.remove();
+ // console.log("Elemento eliminado");
+  
+  // Cerrar el modal de confirmación
+ // $('#confirmDelete').modal('hide');
+// });
+
+
 // Añadimos función para eliminar las tarejetas.
+/**
+ * Como alternativa a el modal de confirmación de bootrap que ha dado muchos
+ * problemas, hemos utilizado el modal de confirmación del navegador, el cual
+ * se abre mediante el método window.confirm(), que hace la mísma funcionalidad.
+ */
 function deleteWeek(week) {
-    week.remove();
-    $('#confirmModal').modal('hide');
-}
+    if (window.confirm("¿Estás seguro que deseas eliminar esta semana?")) {
+        // True -> Ejecuta la acción de eliminación
+        week.remove();
+        console.log("Elemento eliminado");
+      } else {
+        // False -> No se hace nada
+}}
