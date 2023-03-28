@@ -100,15 +100,21 @@ function deleteWeek(week){
     })
 }
 
-function weekTasks(){
-  var button = document.getElementById('acceder');
-  location.assign('/public/weektasks.html');
+//Funcion que abre el modal de confirmación de eliminar
+//recogemos el id del botón de eliminar b{n}, 
+//cambiamos al id por el del div del card c{n}, y lo eliminamos 
+
+function deleteWeekbyId(id){
+  deleteModal.showModal();
+  deleteBtn.addEventListener('click', function(){
+      const week= document.getElementById(id.replace('b', 'c'));
+      week.remove();
+      deleteModal.close();
+  })
+  closeDeleteButton.addEventListener('click', function(){
+      deleteModal.close();
+  })
 }
-
-
-
-
-
 
 
 

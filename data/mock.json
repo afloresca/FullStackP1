@@ -1,0 +1,6 @@
+[
+    {"id" : 13, "num_semana" : 13, "nombre" : "Tarjeta 1", "color" : "blue", "descripcion" : " semana mock 1", "year" : 2023, "fechaInicio" : "2023-03-27", "fechaFin" : "2023-04-02"},
+    {"id" : 15, "num_semana" : 15, "nombre" : "Tarjeta 2", "color" : "red", "descripcion" : " semana mock 2", "year" : 2023, "fechaInicio" : "2023-04-10", "fechaFin" : "2023-04-16"},
+    {"id" : 18, "num_semana" : 18, "nombre" : "Tarjeta 3", "color" : "grey", "descripcion" : " semana mock 3", "year" : 2023, "fechaInicio" : "2023-05-01", "fechaFin" : "2023-05-07"}
+
+]
