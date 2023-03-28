@@ -48,7 +48,7 @@
       </div>
     </nav>
 
-    <div class="container-fluid px-5">
+    <div id="container" class="container-fluid px-5">
       <button class="btn btn-primary mt-4 ml-5 mb-5 d-flex justify-content-center align-items-center" onclick="addWeekModal()">+ Añadir Semana</button>
       <div class="row" id="weekContainer">
         <!-- Container donde se irán almacenando las tarjetas que se generen mediante el formulario, como en el enunciado
@@ -57,7 +57,7 @@
            -->
 
         <!-- Ejemplo 1 -->
-        <div class="col-sm-4">
+        <div id="c1" class="col-sm-4">
           <div
             class="card mb-3 p-2"
             style="background-color: #E0CFFC; border: 1px solid #DEE2E6;
@@ -69,9 +69,9 @@
               <p class="card-text"><strong>Fecha inicio:</strong> 2023-08-16</p>
               <p class="card-text"><strong>Fecha fin:</strong>2023-08-23</p>
               <button id="acceder" class="btn btn-primary" onclick="weekTasks()">Acceder</button>
-              <button
+              <button id="b1"
                 class="btn btn-danger"
-                onclick="deleteWeek(this.parentNode.parentNode.parentNode)"
+                onclick="deleteWeekbyId(this.id)"
               >
                 Eliminar
               </button>
@@ -175,7 +175,7 @@
         </div>
       </dialog>
     
-
+    <script src="../js/app.js"></script>
     <script src="../js/handleWeek.js"></script>
   </body>
 </html>
