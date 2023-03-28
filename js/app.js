@@ -1,4 +1,9 @@
-function weekTasks(){
+/**
+ * JS funciones generales de control del FrontEnd
+ */
+
+function weekTasks(a){
+  console.log(a);
     var button = document.getElementById('acceder');
     location.assign('/public/weektasks.html');
   }
@@ -14,7 +19,7 @@ function weekTasks(){
   // función que cargará las tarjetas obtenidas de la lectura de datos
   function loadWeeks(jsonWeek){
     jsonWeek.forEach(weekCard => {
-      console.log(weekCard.id);
+      cards(weekCard);
     });
   }
 
@@ -28,4 +33,4 @@ function weekTasks(){
   }
 
 //carga las semanas.
-fetchWeeks();
+document.onload = fetchWeeks();

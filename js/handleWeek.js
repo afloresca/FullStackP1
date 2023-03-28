@@ -13,11 +13,11 @@ const modal = document.getElementById("addWeekModal");
 
 
 // Recogemos todos los datos que añadimos en el modal.
-let nombreSemana = document.getElementById("nombre-semana");
-let descripcion = document.getElementById("descripcion");
-let fechaInicio = document.getElementById("fecha-inicio");
-let fechaFin = document.getElementById("fecha-fin");
-let color = document.getElementById("color");
+modNombre = document.getElementById("nombre-semana");
+modDesc = document.getElementById("descripcion");
+modFecIni = document.getElementById("fecha-inicio");
+modFecFin = document.getElementById("fecha-fin");
+modColor = document.getElementById("color");
 
 // Recogemos los datos relativos al modal de confirmación
 let deleteModal = document.getElementById('deleteModal');
@@ -43,46 +43,25 @@ let closeButton = document.getElementById('btnCloseWeekModal');
     console.log('hola')
   // Validacion de campos obligatorios
   if (
-    nombreSemana.value === "" ||
-    color.value === "" ||
-    fechaInicio.value === "" ||
-    fechaFin.value === ""
+    modNombre.value === "" ||
+    modColor.value === "" ||
+    modFecIni.value === "" ||
+    modFecFin.value === ""
   ) {
-    console.log(nombreSemana.value)
+    console.log(modNombre.value)
     alert("Debes rellenar todos los campos obligarorios");
     return false;
   } else {
-    // Crear un nuevo elemento de div para la tarjeta
-    let nuevaTarjeta = document.createElement("div");
 
-    // Agregar las clases necesarias para la organización de las mismas por pantalla
-    nuevaTarjeta.classList.add("col-sm-4");
-
-    // Crear el contenido de la tarjeta utilizando los valores del formulario y los estilos de bootstrap
-    nuevaTarjeta.innerHTML = `
-            <div class="card mb-3 p-2" style="background-color: ${color.value}; border: 1px solid #DEE2E6;
-            border-radius: 18px">
-                <div class="card-body">
-                    <h5 class="card-title">${nombreSemana.value}</h5>
-                    <p class="card-text">${descripcion.value}</p>
-                    <p class="card-text"><strong>Fecha inicio:</strong> ${fechaInicio.value}</p>
-                    <p class="card-text"><strong>Fecha fin:</strong> ${fechaFin.value}</p>
-                    <button class="btn btn-primary"> Acceder </button>
-                    <button class="btn btn-danger" onclick="deleteWeek(this.parentNode.parentNode.parentNode)"> Eliminar </button>
-                </div>
-            </div>
-        `;
-
-    // Agregar la tarjeta al contenedor
-    let contenedorSemanas = document.getElementById("weekContainer");
-    contenedorSemanas.appendChild(nuevaTarjeta);
-
+    cardsModal(modNombre.value, modDesc.value, modFecIni.value, modFecFin.value,  modColor.value);
+ 
     // Limpiamos los valores del formulario
-    nombreSemana.value = "";
-    descripcion.value = "";
-    fechaInicio.value = "";
-    fechaFin.value = "";
-    color.value = "";
+
+    modNombre.value = "";
+    modDesc.value = "";
+    modFecIni.value = "";
+    modFecFin.value = "";
+    modColor.value = "";
     modal.close();
   }
 }
@@ -100,21 +79,7 @@ function deleteWeek(week){
     })
 }
 
-//Funcion que abre el modal de confirmación de eliminar
-//recogemos el id del botón de eliminar b{n}, 
-//cambiamos al id por el del div del card c{n}, y lo eliminamos 
 
-function deleteWeekbyId(id){
-  deleteModal.showModal();
-  deleteBtn.addEventListener('click', function(){
-      const week= document.getElementById(id.replace('b', 'c'));
-      week.remove();
-      deleteModal.close();
-  })
-  closeDeleteButton.addEventListener('click', function(){
-      deleteModal.close();
-  })
-}
 
 
 
