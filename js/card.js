@@ -16,22 +16,12 @@ function cards(card) {
     this.color = card.color;
     this.descripcion = card.descripcion;
     this.year = card.year;
-    this.fechaInicio = card.fechaInicio;
+    this.fechaInicio = calculaPrimerDiaSemana(this.year, this.num_semana).toLocaleDateString("es-ES");
     this.cardParms = JSON.stringify(card).replaceAll('"', "'"); 
     createDomCard();
 }
 
-function cardsModal(modNombre, modDesc, modFecIni, modColor){
-    this.id = modNombre;
-    this.num_semana =  modNombre
-    this.nombre = modDesc;
-    this.color = modColor;
-    this.descripcion = modDesc;
-    this.year = 0000;
-    this.fechaInicio = modFecIni;
-    this.cardParms = this.id  + ', "' + modNombre + '", "' + modDesc + '", "' + modFecIni  +  modColor + '"';
-    createDomCard();
-}
+
 
 function getDivIdCard(){
     return "card" + this.id;

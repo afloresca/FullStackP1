@@ -13,11 +13,12 @@ const modal = document.getElementById("addWeekModal");
 
 
 // Recogemos todos los datos que añadimos en el modal.
-modNombre = document.getElementById("nombre-semana");
-modDesc = document.getElementById("descripcion");
-modFecIni = document.getElementById("fecha-inicio");
-modFecFin = document.getElementById("fecha-fin");
-modColor = document.getElementById("color");
+let modNombre = document.getElementById("nombre-semana");
+let modDesc = document.getElementById("descripcion");
+let modColor = document.getElementById("cardcolor");
+let modYear = document.getElementById("year");
+let modNumSemana = document.getElementById("numSemana");
+let modVacaciones = document.getElementById("vacaciones");
 
 // Recogemos los datos relativos al modal de confirmación
 let deleteModal = document.getElementById('deleteModal');
@@ -44,24 +45,34 @@ let closeButton = document.getElementById('btnCloseWeekModal');
   // Validacion de campos obligatorios
   if (
     modNombre.value === "" ||
-  //  modColor.value === "" || con la paleta siempre va a tener un color
-    modFecIni.value === "" ||
-    modFecFin.value === ""
+    modYear.value === "" 
   ) {
-    console.log(modNombre.value)
     alert("Debes rellenar todos los campos obligarorios");
     return false;
-  } else {
+  } else if (
+    modYear.value < "1990"  ||
+    modYear.value > "2099" 
+  ) {
+    alert("Los años deben ser entre 1990 y 2099");
+    return false;    
+  } else if (
+    checkYearWeekNumber(modYear.value, modNumSemana.value) 
+  ) {
+    alert("Número semana no válido");
+    return false;
+  } 
+  
+  else {
 
     //creamos la nueva card de semanal
-    cardsModal(modNombre.value, modDesc.value, modFecIni.value, modFecFin.value,  modColor.value);
+    console.log(modColor.value);
+    cards({"id" : modYear.Value + modNumSemana.value + "", "num_semana" : modNumSemana.value, "nombre" : modNombre.value, "color" : modColor.value, "descripcion" : modDesc.value, "year" : modYear.value, "vacaciones" : modVacaciones.value});
  
     // Limpiamos los valores del formulario
 
     modNombre.value = "";
     modDesc.value = "";
-    modFecIni.value = "";
-    modFecFin.value = "";
+    modVacaciones.value = "";
     modColor.value = DEFAULT_COLOR; 
     modal.close();
   }

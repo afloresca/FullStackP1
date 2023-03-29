@@ -40,16 +40,17 @@ function modalAddWeekHtml(){
       </div>
       <div class="form-group">
         <label for="color" class="col-form-label"><strong style="color: red;">*</strong>Seleciona Color</span>
-        <input type="color" class="form-select border border-1"  id="color" value = "#edede9" required> 
+        <input type="color" class="form-select border border-1"  id="cardcolor" value = "#edede9" required> 
       </div>
       <div class="form-group">
+        <div class="col-sm-10">
+        <label for="vacaciones" class="col-form-label">Semana de Vacaciones</label>
+          <input type="checkbox" id="vacaciones" name="vacaciones" value="S">
+        </div
         <label for="numSemana" class="col-form-label"><strong style="color: red;">*</strong>Número Semana</label>
-        <input type="number" min="1" max="${new Date().getMaxWeeksPerYear()}" step="1" value="${new Date().getWeekNumber()}" class="form-control" id="numSem-add">
+        <input type="numSemana" id="numSemana" min="1" max="${new Date().getMaxWeeksPerYear()}" step="1" value="${new Date().getWeekNumber()}" class="form-control" id="numSem-add">
         <label for="year" class="col-form-label"><strong style="color: red;">*</strong>Año</label>
-        <input type="number" min="1900" max="2099" step="1" value="${new Date().getFullYear()}" class="form-control" id="año-add">
-
-      <!--  <label for="fecha-inicio" class="col-form-label"><strong style="color: red;">*</strong>Fecha inicio:</label>
-        <input type="date" class="form-control" id="fecha-inicio" required> -->
+        <input type="year" id="year" min="1900" max="2099" step="1" value="${new Date().getFullYear()}" class="form-control" id="año-add">
       </div>
     </form>
     <div class="modal-footer pt-2 d-flex gap-2">
