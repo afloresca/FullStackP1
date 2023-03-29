@@ -44,7 +44,7 @@ let closeButton = document.getElementById('btnCloseWeekModal');
   // Validacion de campos obligatorios
   if (
     modNombre.value === "" ||
-    modColor.value === "" ||
+  //  modColor.value === "" || con la paleta siempre va a tener un color
     modFecIni.value === "" ||
     modFecFin.value === ""
   ) {
@@ -62,7 +62,7 @@ let closeButton = document.getElementById('btnCloseWeekModal');
     modDesc.value = "";
     modFecIni.value = "";
     modFecFin.value = "";
-    modColor.value = "";
+    modColor.value = DEFAULT_COLOR; 
     modal.close();
   }
 }

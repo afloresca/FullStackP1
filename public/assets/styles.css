@@ -24,3 +24,8 @@
     display: inline-block;
     float: none; /* Very important */
 }
+
+input[type="color"] {
+	border: none;
+	height: 50px;
+}

@@ -1,6 +1,6 @@
 [
-    {"id" : "13", "num_semana" : 13, "nombre" : "Tarjeta 1", "color" : "#E0CFFC", "descripcion" : " semana mock 1", "year" : 2023, "fechaInicio" : "2023-03-27", "fechaFin" : "2023-04-02"},
-    {"id" : "15", "num_semana" : 15, "nombre" : "Tarjeta 2", "color" : "#F7D6E6", "descripcion" : " semana mock 2", "year" : 2023, "fechaInicio" : "2023-04-10", "fechaFin" : "2023-04-16"},
-    {"id" : "18", "num_semana" : 18, "nombre" : "Tarjeta 3", "color" : "#FFF3CD", "descripcion" : " semana mock 3", "year" : 2023, "fechaInicio" : "2023-05-01", "fechaFin" : "2023-05-07"}
+    {"id" : "13", "num_semana" : 13, "nombre" : "Tarjeta 1", "color" : "#E0CFFC", "descripcion" : "Semana mock 1", "year" : 2023, "fechaInicio" : "2023-03-27"},
+    {"id" : "15", "num_semana" : 15, "nombre" : "Tarjeta 2", "color" : "#F7D6E6", "descripcion" : "Semana mock 2", "year" : 2023, "fechaInicio" : "2023-04-10"},
+    {"id" : "18", "num_semana" : 18, "nombre" : "Tarjeta 3", "color" : "#FFF3CD", "descripcion" : "Semana mock 3", "year" : 2023, "fechaInicio" : "2023-05-01"}
 
 ]
