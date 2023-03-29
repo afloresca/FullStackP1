@@ -22,44 +22,25 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-light">
       <a class="navbar-brand ms-2" href="#">Calendario Semanal</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button  class="navbar-toggler"  type="button" data-toggle="collapse"  data-target="#navbarNav"  aria-controls="navbarNav"  aria-expanded="false"  aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Acerca de</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contacto</a>
+            <a class="nav-link" href="#" onclick="loadMain()">Inicio</a>
           </li>
         </ul>
       </div>
+      <span id="titulo" class="navbar-brand ms-2"></span>
     </nav>
 
     <div id="container" class="container-fluid px-5">
-      <button class="btn btn-primary mt-4 ml-5 mb-5 d-flex justify-content-center align-items-center" onclick="addWeekModal()">+ Añadir Semana</button>
-      <div class="row" id="weekContainer">
-        <!-- Container donde se irán almacenando las tarjetas que se generen mediante el formulario, como en el enunciado
-              se solicita explicitamente que se muestren algunos datos introducidos a mano, añadiremos tres tarjetas estáticas
-              que estarán aquí siempre que refresques la página (aún y si las eliminas).
-           -->
 
-  
-      </div>
     </div>
 
+
+    <!-- MODALES -->
    
 <!--AddWeek Modal Form-->
     <dialog id="addWeekModal" style="border: 1px solid black;
@@ -107,7 +88,89 @@
         </div>
         </div>
       </dialog>
-    
+
+    <!-- MODALES DE TAREAS-->
+
+    <!--AddTarea Modal Form-->
+<dialog id="addTarea" style="border: 1px solid black;
+border-radius: 18px;">
+  <div class="d-flex flex-column p-3 row-gap-3 justify-content-center" >
+  <h4 class="modal-title" >Añadir nueva tarea</h4>
+  <form id="addTareaForm" class="d-flex flex-column row-gap-1">
+    <div class="form-group">
+      <label for="nombre-tarea" class="col-form-label"><strong style="color: red;">*</strong> :</label>
+      <input type="text" class="form-control" id="nombre-tarea" required>
+    </div>
+    <div class="form-group">
+      <label for="año-add" class="col-form-label">Año:</label>
+      <input type="number" min="1900" max="2099" step="1" value="2016" class="form-control" id="año-add">
+    </div>
+    <div class="form-group">
+      <label for="color-add" class="col-form-label"><strong style="color: red;">*</strong> Color (Escribir en inglés):</label>
+      <input type="text" class="form-control" id="color-add" required>
+    </div>
+    <div class="form-group">
+      <label for="fecha-inicio" class="col-form-label"><strong style="color: red;">*</strong> Fecha inicio:</label>
+      <input type="date" class="form-control" id="fecha-inicio-add" required>
+    </div>
+    <div class="form-group">
+      <label for="fecha-fin" class="col-form-label"><strong style="color: red;">*</strong> Fecha fin:</label>
+      <input type="date" class="form-control" id="fecha-fin-add" required>
+    </div>
+  </form>
+  <div class="modal-footer pt-2 d-flex gap-2">
+    <button type="button" class="btn btn-secondary" id="btnCloseAddTarea">Cerrar</button>
+    <button type="button" class="btn btn-primary"  id="btnAddTarea">Modificar</button>
+  </div>
+</div>
+</dialog>
+
+    <!--Modificar Tarea Modal-->
+    <dialog id="modifyTarea" style="border: 1px solid black;
+    border-radius: 18px;">
+      <div class="d-flex flex-column p-3 row-gap-3 justify-content-center" >
+      <h4 class="modal-title" >Modificar nueva tarea</h4>
+      <form id="modifyTareaForm" class="d-flex flex-column row-gap-1">
+        <div class="form-group">
+          <label for="nombre-tarea-mod" class="col-form-label"><strong style="color: red;">*</strong> :</label>
+          <input type="text" class="form-control" id="nombre-tarea-mod" required>
+        </div>
+        <div class="form-group">
+          <label for="año-mod" class="col-form-label">Año:</label>
+          <input type="number" min="1900" max="2099" step="1" value="2016" class="form-control" id="año-mod">
+        </div>
+        <div class="form-group">
+          <label for="color-mod" class="col-form-label"><strong style="color: red;">*</strong> Color (Escribir en inglés):</label>
+          <input type="text" class="form-control" id="color-mod" required>
+        </div>
+        <div class="form-group">
+          <label for="fecha-inicio" class="col-form-label"><strong style="color: red;">*</strong> Fecha inicio:</label>
+          <input type="date" class="form-control" id="fecha-inicio-mod" required>
+        </div>
+        <div class="form-group">
+          <label for="fecha-fin" class="col-form-label"><strong style="color: red;">*</strong> Fecha fin:</label>
+          <input type="date" class="form-control" id="fecha-fin-mod" required>
+        </div>
+      </form>
+      <div class="modal-footer pt-2 d-flex gap-2">
+        <button type="button" class="btn btn-secondary" id="btnCloseModTarea">Cerrar</button>
+        <button type="button" class="btn btn-primary"  id="btnModTarea">Modificar</button>
+      </div>
+    </div>
+    </dialog>
+
+    <!--Delete Confirmation Modal-->
+      <dialog id="deleteTarea" style="border: 1px solid black;
+      border-radius: 18px;">
+        <div class="d-flex flex-column p-3 text-center row-gap-2 justify-content-center">
+        <h4>¿Estás seguro que deseas eliminar esta tarea?</h4>
+        <div class="d-flex flex-row column-gap-1 justify-content-center">
+        <button type="button" class="btn btn-secondary" id="">Cerrar</button>
+        <button type="button" class="btn btn-danger"  id="">Eliminar</button>
+        </div>
+        </div>
+      </dialog>
+
     <script src="../js/app.js"></script>
     <script src="../js/card.js"></script>
     <script src="../js/handleWeek.js"></script>

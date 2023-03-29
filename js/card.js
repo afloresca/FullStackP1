@@ -19,7 +19,9 @@ function cards(card) {
     this.year = card.year;
     this.fechaInicio = card.fechaInicio;
     this.fechaFin = card.fechaFin;
-    this.cardParms = JSON.stringify(card); 
+    this.cardParms = JSON.stringify(card).replaceAll('"', "'"); 
+   // this.cardParms =     this.id + ', ' +   this.num_semana + ', "' +  this.nombre + '" , "' +   this.color + '" , "' +  this.descripcion + '", ' +
+                          this.year + ', "' +   this.fechaInicio + '", "' +  this.fechaFin + '"';;
     createDomCard();
 }
 
@@ -58,7 +60,7 @@ function getHtmlCard(){
             <p class="card-text">${this.descripcion}</p>
             <p class="card-text"><strong>Fecha inicio:</strong>${this.fechaInicio}</p>
             <p class="card-text"><strong>Fecha fin:</strong>${this.fechaFin}</p>
-            <button class="btn btn-primary" onclick="weekTasks(${this.id})"> Acceder </button>
+            <button class="btn btn-primary" onclick="weekTasks(${this.cardParms}, )"> Acceder </button>
             <button class="btn btn-danger" onclick="deleteCardById('${this.getDivIdCard()}')"> Eliminar </button>
         </div>
     </div>`;

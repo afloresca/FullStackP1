@@ -53,6 +53,7 @@ let closeButton = document.getElementById('btnCloseWeekModal');
     return false;
   } else {
 
+    //creamos la nueva card de semanal
     cardsModal(modNombre.value, modDesc.value, modFecIni.value, modFecFin.value,  modColor.value);
  
     // Limpiamos los valores del formulario
