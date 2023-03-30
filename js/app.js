@@ -5,12 +5,7 @@
 // Paleta de colores
 const DEFAULT_COLOR = "#edede9"; 
 
-function weekTasks(a){
-  console.log(a);
-    var button = document.getElementById('acceder');
-    location.assign('/public/weektasks.html');
-  }
-  
+ 
 
   // función que cargará las tarjetas obtenidas de la lectura de datos
   function loadWeeks(jsonWeek){
@@ -47,18 +42,24 @@ function weekTasks(a){
     let container = document.getElementById("container");
     container.innerHTML=`<button class="btn btn-primary mt-4 ml-5 mb-5 d-flex justify-content-center align-items-center" onclick="addWeekModal()">+ Añadir Semana</button>
     <div class="row" id="weekContainer">
-    </div>`
+    </div>`;
   }
 
+  /**
+   * Carga la pantalla de planificación semanal de tareas
+   */
   function loadDivTasksWeeks(){
-
+    loadNavBar("PLANIFICACIÓN SEMANAL");
+    let container = document.getElementById("container");
+    container.innerHTML= `<div class="row" id="tareasContainer">
+    </div>`;
   }
 
 
   function loadMain(){
       loadNavBar("TARJETAS");
       loadDivCardWeeks();
-      modalDialog();
+      modalDialogCard();
       fetchWeeks();
   }
 

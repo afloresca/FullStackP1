@@ -1,12 +1,13 @@
-    // instance private fields
+
  let  id = "";
  let  num_semana = -1;
  let  nombre = "";
  let  color = "";
  let  descripcion = "";
  let  year = -1;
- let  fechaInicio = "9999-99-99";
+ let  fechaInicio = "99-99-9999";
  let  cardParms ="";
+ let vacaciones ="";
 
 
 function cards(card) {
@@ -17,6 +18,7 @@ function cards(card) {
     this.descripcion = card.descripcion;
     this.year = card.year;
     this.fechaInicio = calculaPrimerDiaSemana(this.year, this.num_semana).toLocaleDateString("es-ES");
+    this.vacaciones = card.vacaciones;
     this.cardParms = JSON.stringify(card).replaceAll('"', "'"); 
     createDomCard();
 }
@@ -26,10 +28,11 @@ function cards(card) {
 function getDivIdCard(){
     return "card" + this.id;
 }
-
+/**
+ * crea el contenedor de semanas
+ */
 function createDomCard(){
     let weekContainer = document.getElementById("weekContainer");
-    console.log(weekContainer);
     let newCard = document.createElement("div");
     newCard.classList.add("col-sm-4");
     newCard.setAttribute("id", getDivIdCard());
@@ -37,25 +40,32 @@ function createDomCard(){
     weekContainer.appendChild(newCard);
 }
 
+/**
+ * retorna el codigo html para las cards de semana
+ * @returns html
+ */
 function getHtmlCard(){
-    const html = 
+    let html = 
     `<div  class="card mb-3 p-2" style="background-color: ${this.color}; border: 1px solid DEE2E6;  border-radius: 18px">
         <div class="card-body">
-            <h5 class="card-title"><strong>${this.nombre}</strong></h5>
-            <p class="card-text">${this.descripcion}</p>
-            <p class="card-text"><strong>Semana Número: </strong>${this.num_semana}</p>
-            <p class="card-text"><strong>Año: </strong>${this.year}</p>
-            <p class="card-text"><strong>Fecha Inicio Semana: </strong>${this.fechaInicio}</p>
-            <button class="btn btn-primary" onclick="weekTasks(${this.cardParms}, )"> Acceder </button>
-            <button class="btn btn-danger" onclick="deleteCardById('${this.getDivIdCard()}')"> Eliminar </button>
-        </div>
-    </div>`;
+            <div class="d-flex justify-content-between">
+            <h5 class="card-title "><strong>${this.nombre}</strong></h5>`+  ((this.vacaciones === "S") ? `<strong>¡VACACIONES!</strong>` : ``) + 
+            `</div> <p class="card-text">${this.descripcion}</p>
+                    <p class="card-text"><strong>Semana Número: </strong>${this.num_semana}</p>
+                    <p class="card-text"><strong>Año: </strong>${this.year}</p>
+                    <p class="card-text"><strong>Fecha Inicio Semana: </strong>${this.fechaInicio}</p>
+                    <button class="btn btn-primary" onclick="weekTasks(${this.cardParms}, )"> Acceder </button>
+                    <button class="btn btn-danger" onclick="deleteCardById('${this.getDivIdCard()}')"> Eliminar </button>
+                </div>
+            </div>`;
     return html;
 }
 
-//Funcion que abre el modal de confirmación de eliminar
-//recogemos el id del botón de eliminar b{n}, 
-//cambiamos al id por el del div del card c{n}, y lo eliminamos 
+
+/**
+ * Funcion que abre el modal de confirmación de eliminar
+ * @param {*} id 
+ */
 
 function deleteCardById(id){
     deleteModal.showModal();

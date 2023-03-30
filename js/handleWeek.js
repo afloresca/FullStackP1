@@ -41,7 +41,6 @@ let closeButton = document.getElementById('btnCloseWeekModal');
 
  //Evento que cuando clickas en el boton añadir valida los campos del modal y añade la semana si son correctos
  btnAddWeek.addEventListener('click', function (){
-    console.log('hola')
   // Validacion de campos obligatorios
   if (
     modNombre.value === "" ||
@@ -65,7 +64,6 @@ let closeButton = document.getElementById('btnCloseWeekModal');
   else {
 
     //creamos la nueva card de semanal
-    console.log(modColor.value);
     cards({"id" : modYear.Value + modNumSemana.value + "", "num_semana" : modNumSemana.value, "nombre" : modNombre.value, "color" : modColor.value, "descripcion" : modDesc.value, "year" : modYear.value, "vacaciones" : modVacaciones.value});
  
     // Limpiamos los valores del formulario

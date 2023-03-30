@@ -2,30 +2,82 @@
  * JS de Carga y destrucción de modales
  */
 
-//Main Dialogs
-function modalDialog(){
+
+/**
+ * Carga los modales en el html de pagina Inicio
+ */
+function modalDialogCard(){
     modalAddWeek();
-    modalDeleteConfirmation();
+    modalDeleteCard()
 }
 
-//AddWeek Modal Form
+function modalDialogTasks(){
+  modalAddTask();
+}
 
-function modalAddWeek(){
-    body = document.body; 
-    dialog = document.createElement("dialog");
-    dialog.classList.add("col-sm-4");
-    dialog.setAttribute("id", "addWeekModal");
-    dialog.setAttribute("style", "border: 1px solid black; border-radius: 18px;");
+
+/**
+ * Crea Modal y asigna id
+ * @param {id del Element} id 
+ * @returns 
+ */
+function createDialog(id){
+  dialog = document.createElement("dialog");
+  dialog.classList.add("col-sm-4");
+  dialog.setAttribute("id", id);
+  dialog.setAttribute("style", "border: 1px solid black; border-radius: 18px;");
+  return dialog;
+}
+
+
+/**
+ * Div para Avisos
+ * @returns div Element
+ */
+function createDivWarning(){
     div = document.createElement("div");
     div.classList.add("d-flex");
     div.classList.add("flex-column");
     div.classList.add("p-3");
-    div.classList.add("row-gap-3");
+    div.classList.add("text-center");   
+    div.classList.add("row-gap-2");
     div.classList.add("justify-content-center");
+    return div;
+}
+
+
+
+/**
+ * Div para Form
+ * @returns div Element
+ */
+function createDivForm(){
+  div = document.createElement("div");
+  div.classList.add("d-flex");
+  div.classList.add("flex-column");
+  div.classList.add("p-3");
+  div.classList.add("row-gap-3");
+  div.classList.add("justify-content-center");
+  return div;
+}
+
+
+/**
+ * AddWeek Modal Form
+ */
+function modalAddWeek(){
+    body = document.body; 
+    dialog = createDialog("addWeekModal");
+    div = createDivForm();
     div.innerHTML = modalAddWeekHtml();
     dialog.appendChild(div);
     body.appendChild(dialog);
 }
+
+/**
+ * Modal de Insertar nueva semana
+ * @returns html
+ */
 
 function modalAddWeekHtml(){
     html = `<h4 class="modal-title" id="myModalLabel">Formulario de registro de semana</h4>
@@ -61,24 +113,23 @@ function modalAddWeekHtml(){
     return html;
 }
 
-//Delete Confirmation Modal
-function modalDeleteConfirmation(){
-    var body = document.body; 
-    dialog = document.createElement("dialog");
-    dialog.setAttribute("id", "deleteModal");
-    dialog.setAttribute("style", "border: 1px solid black; border-radius: 18px;");
-    div = document.createElement("div");
-    div.classList.add("d-flex");
-    div.classList.add("flex-column");
-    div.classList.add("p-3");
-    div.classList.add("text-center");   
-    div.classList.add("row-gap-2");
-    div.classList.add("justify-content-center");
-    div.innerHTML = modalDeleteConfirmationHtml();
+
+/**
+ * Delete Confirmation Modal
+ */
+function modalDeleteCard(){
+    body = document.body; 
+    dialog = createDialog("deleteModal");
+    div = createDivWarning();
+    div.innerHTML = modalDeleteCardHtml();
     dialog.appendChild(div);
     body.appendChild(dialog);
 }
-function modalDeleteConfirmationHtml(){
+/**
+ * html del modal de confirmación tarjeta semana
+ * @returns html
+ */
+function modalDeleteCardHtml(){
     html = `<h4>¿Estás seguro que deseas eliminar esta semana?</h4>
     <div class="d-flex flex-row column-gap-1 justify-content-center">
     <button type="button" class="btn btn-secondary" id="btnCloseDeleteModal">Cerrar</button>
@@ -89,21 +140,61 @@ function modalDeleteConfirmationHtml(){
 }
 
 
-//Tasks Weeks MODAL 
+//Tasks Weeks MODAL (inteface 3)
 
 
-
-
-
-//AddTarea Modal Form
-
-function modalAddTask(){
-
+/**
+ * AddTarea Modal Form
+ */
+function modalAddTask(){    
+  body = document.body; 
+  dialog = createDialog("addTarea");
+  div =  createDivForm();
+  div.innerHTML = modalAddTaskHtml();
+  dialog.appendChild(div);
+  body.appendChild(dialog);
 }
 
+/**
+ * Html del modal para actualizar/insertar tarea
+ * @returns html text
+ */
 function modalAddTaskHtml(){
-    html = `
+    html = `<h4 class="modal-title" >Añadir nueva tarea</h4>
+    <form id="addTareaForm" class="d-flex flex-column row-gap-1">
+      <div class="form-group">
+        <label for="nombre-tarea" class="col-form-label"><strong style="color: red;">*</strong> :</label>
+        <input type="text" class="form-control" id="nombre-tarea" required>
+      </div>
+      <div class="form-group">
+        <label for="taskdesc" class="col-form-label">Descripción:</label>
+        <input type="text" class="form-control" id="taskdesc" required>
+      </div>
+    </form>
+    <div class="modal-footer pt-2 d-flex gap-2">
+      <button type="button" class="btn btn-secondary" id="btnCloseAddTarea">Cerrar</button>
+      <button type="button" class="btn btn-primary"  id="btnAddTarea">Grabar</button>
+    </div>
     `
     return html;
 }
 
+function modalDeleteTask(){
+  body = document.body; 
+  dialog = createDialog("deleteTarea");
+  div = createDivWarning();
+  div.innerHTML = modalDeleteTaskHtml();
+  dialog.appendChild(div);
+  body.appendChild(dialog);
+}
+
+function modalDeleteTaskHtml(){
+  html = `
+    <h4>¿Estás seguro que deseas eliminar esta tarea?</h4>
+    <div class="d-flex flex-row column-gap-1 justify-content-center">
+    <button type="button" class="btn btn-secondary" id="">Cerrar</button>
+    <button type="button" class="btn btn-danger"  id="">Eliminar</button>
+    </div>
+  `;
+  return html;
+}
