@@ -4,6 +4,8 @@
 
 // Paleta de colores
 const DEFAULT_COLOR = "#edede9"; 
+const DEFAULT_TASK_COLOR = "#eab676"
+const WHT_COLOR = "#FAFAFA";
 
  
 
@@ -50,6 +52,8 @@ const DEFAULT_COLOR = "#edede9";
       loadNavBar("TARJETAS SEMANALES");
       loadDivCardWeeks();
       modalDialogCard();
+      modalAddTask();
+      modalDeleteTask();
       fetchWeeks();
   }
 

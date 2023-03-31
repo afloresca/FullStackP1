@@ -10,7 +10,8 @@
     let  colorT = "";
     let  descripcionT = "";
     let  dia = "";
-
+    let plan; //datos de la card
+    let numTareas = 0;
 
     /**
      * constructor de tareas a partir de un json dado
@@ -25,10 +26,12 @@
         this.descripcionT = task.descripcion;
         this.dia = task.dia;
         this.taskParms = JSON.stringify(task).replaceAll('"', "'");         
-        if (this.dia === "") createUnaTask();
-        else createAssignedTask();
     }
     
+    function generateTask(){
+      if (this.dia === "") createUnaTask();
+      else createAssignedTask();
+    }
 
 
     /**
@@ -48,7 +51,9 @@
         taskContainer.appendChild(createTask());    
     }
 
-
+    function getTaskDivId(){
+        return "task" + this.idT;
+    }
 
     /**
      * crea un elemento tarea
@@ -56,48 +61,44 @@
      */
     function createTask(){
         let task = document.createElement("div");
-        task.setAttribute("id", "task" + this.idT);
+        task.setAttribute("id", this.getTaskDivId());
         task.setAttribute("style", "border: 1px solid DEE2E6;  border-radius: 18px; background-color:" + this.colorT);
-        task.innerHTML = 
-        `<h5 class="p-2">${this.nombreT}</h5>  
-        <input type="hidden" id="diaTarea" value="${this.dia}">  
-        <input type="hidden" id="idT" value="${this.idT}">                          
-         <div class="d-flex flex-row p-1 justify-content-center gap-1">
-            <button class="btn btn-primary tareas-btn" onclick="">
-                Modificar
-            </button>
-            <button class="btn btn-danger tareas-btn" onclick="">
-                Eliminar
-            </button>
-        </div>`;
+        task.innerHTML = getTaskHtml();
         return task
     }
 
-    /**
-     * Funcion que abre el modal de confirmación de eliminar
-     * @param {*} id 
-     */
-    function deleteTaskById(id){
-        deleteModal.showModal();
-        deleteBtn.addEventListener('click', function(){
-            const week= document.getElementById(id);
-            week.remove();
-            deleteModal.close();
-        })
-        closeDeleteButton.addEventListener('click', function(){
-            deleteModal.close();
-        })
-      }
+    function getTaskHtml(){
+      let html= `<h5 class="p-2">${this.nombreT}</h5>  
+      <input type="hidden" id="diaTarea" value="${this.dia}">  
+      <input type="hidden" id="idT" value="${this.idtask}"> 
+      <input type="hidden" id="diaTarea" value="${this.descripcionT}">  
+      <input type="hidden" id="idT" value="${this.idT}">                          
+       <div class="d-flex flex-row p-1 justify-content-center gap-1">
+          <button class="btn btn-primary tareas-btn" onclick="updateTask(${this.taskParms})">
+              Modificar
+          </button>
+          <button class="btn btn-danger tareas-btn" onclick="deleteTaskById('${this.getTaskDivId()}')")>
+              Eliminar
+          </button>
+      </div>`;
+      return html;
+    }
+  
 
 
 
   /**
    * función que cargará las tarjetas obtenidas de la lectura de datos
+   * si la tarea pertenece a la semana la carga
    * @param {*} jsonTask 
    */
   function loadTasks(jsonTask){
     jsonTask.forEach(weekTask => {
-      tasks(weekTask);
+      if (weekTask.idcard === plan.id){
+        numTareas++;
+        tasks(weekTask);
+        generateTask();
+      }    
     });
   }
 
@@ -111,4 +112,17 @@
     .then((json) => {
       loadTasks(json);
     });
+  }
+/**
+ * Se encarga de 
+ * @param {*} plan
+ */
+  function weekTasks(p){
+    plan = p; //cargamos los datos de la semana que nos ha llegado de la tarjeta
+
+    loadDivTasksWeeks();
+    createUnaTasksDiv();
+    createWeekTaskDiv();
+    createWeekDays();
+    fetchTasks();
   }

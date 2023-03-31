@@ -93,7 +93,22 @@ function deleteWeek(week){
 
 
 
+/**
+ * Funcion que abre el modal de confirmación de eliminar
+ * @param {*} id 
+ */
 
+function deleteCardById(id){
+  deleteModal.showModal();
+  deleteBtn.addEventListener('click', function(){
+      const week= document.getElementById(id);
+      week.remove();
+      deleteModal.close();
+  })
+  closeDeleteButton.addEventListener('click', function(){
+      deleteModal.close();
+  })
+}
 
 
 

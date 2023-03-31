@@ -60,27 +60,3 @@ function getHtmlCard(){
             </div>`;
     return html;
 }
-
-/**
- * Añade tareas
- */
-function addTask(){
-    document.getElementById('addTarea').showModal(); //Mostrar modal añadir tareas
-}
-
-/**
- * Funcion que abre el modal de confirmación de eliminar
- * @param {*} id 
- */
-
-function deleteCardById(id){
-    deleteModal.showModal();
-    deleteBtn.addEventListener('click', function(){
-        const week= document.getElementById(id);
-        week.remove();
-        deleteModal.close();
-    })
-    closeDeleteButton.addEventListener('click', function(){
-        deleteModal.close();
-    })
-  }

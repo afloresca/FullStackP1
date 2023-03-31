@@ -160,7 +160,9 @@ function modalAddTask(){
  * @returns html text
  */
 function modalAddTaskHtml(){
-    html = `<h4 class="modal-title" >Añadir nueva tarea</h4>
+    html = `<h4 class="modal-title" id="accionTitulo" >INSERTAR / ACTUALIZAR TAREAS</h4>
+    <input="hidden" id="accionT" value="add">
+    <input="hidden" id="modIdTask" value="">
     <form id="addTareaForm" class="d-flex flex-column row-gap-1">
       <div class="form-group">
         <label for="nombre-tarea" class="col-form-label"><strong style="color: red;">*</strong>Nombre tarea :</label>
@@ -171,8 +173,8 @@ function modalAddTaskHtml(){
         <input type="text" class="form-control" id="taskdesc" required>
       </div>
       <div class="form-group">
-      <label for="color" class="col-form-label"><strong style="color: red;">*</strong>Seleciona Color</span>
-      <input type="color" class="form-select border border-1"  id="cardcolor" value = "#edede9" required> 
+      <label for="taskcolor" class="col-form-label"><strong style="color: red;">*</strong>Seleciona Color</span>
+      <input type="color" class="form-select border border-1"  id="taskcolor" value = "${DEFAULT_TASK_COLOR}" required> 
     </div>
     </form>
     <div class="modal-footer pt-2 d-flex gap-2">
