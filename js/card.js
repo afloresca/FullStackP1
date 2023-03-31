@@ -61,6 +61,12 @@ function getHtmlCard(){
     return html;
 }
 
+/**
+ * Añade tareas
+ */
+function addTask(){
+    document.getElementById('addTarea').showModal(); //Mostrar modal añadir tareas
+}
 
 /**
  * Funcion que abre el modal de confirmación de eliminar

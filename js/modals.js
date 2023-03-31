@@ -163,13 +163,17 @@ function modalAddTaskHtml(){
     html = `<h4 class="modal-title" >Añadir nueva tarea</h4>
     <form id="addTareaForm" class="d-flex flex-column row-gap-1">
       <div class="form-group">
-        <label for="nombre-tarea" class="col-form-label"><strong style="color: red;">*</strong> :</label>
+        <label for="nombre-tarea" class="col-form-label"><strong style="color: red;">*</strong>Nombre tarea :</label>
         <input type="text" class="form-control" id="nombre-tarea" required>
       </div>
       <div class="form-group">
         <label for="taskdesc" class="col-form-label">Descripción:</label>
         <input type="text" class="form-control" id="taskdesc" required>
       </div>
+      <div class="form-group">
+      <label for="color" class="col-form-label"><strong style="color: red;">*</strong>Seleciona Color</span>
+      <input type="color" class="form-select border border-1"  id="cardcolor" value = "#edede9" required> 
+    </div>
     </form>
     <div class="modal-footer pt-2 d-flex gap-2">
       <button type="button" class="btn btn-secondary" id="btnCloseAddTarea">Cerrar</button>
@@ -192,8 +196,8 @@ function modalDeleteTaskHtml(){
   html = `
     <h4>¿Estás seguro que deseas eliminar esta tarea?</h4>
     <div class="d-flex flex-row column-gap-1 justify-content-center">
-    <button type="button" class="btn btn-secondary" id="">Cerrar</button>
-    <button type="button" class="btn btn-danger"  id="">Eliminar</button>
+          <button type="button" class="btn btn-secondary" id="btnCloseDelTarea">Cerrar</button>
+          <button type="button" class="btn btn-danger"  id="btnEliminarTarea">Eliminar</button>
     </div>
   `;
   return html;

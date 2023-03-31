@@ -45,19 +45,9 @@ const DEFAULT_COLOR = "#edede9";
     </div>`;
   }
 
-  /**
-   * Carga la pantalla de planificación semanal de tareas
-   */
-  function loadDivTasksWeeks(){
-    loadNavBar("PLANIFICACIÓN SEMANAL");
-    let container = document.getElementById("container");
-    container.innerHTML= `<div class="row" id="tareasContainer">
-    </div>`;
-  }
-
 
   function loadMain(){
-      loadNavBar("TARJETAS");
+      loadNavBar("TARJETAS SEMANALES");
       loadDivCardWeeks();
       modalDialogCard();
       fetchWeeks();

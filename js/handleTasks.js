@@ -1,5 +1,5 @@
 //document.getElementById('modifyTarea').showModal(); //Mostrar modal modificación tareas
-//document.getElementById('addTarea').showModal(); //Mostrar modal añadir tareas
+//
 //document.getElementById('deleteTarea').showModal(); //Mostrar modal eliminar tareas
 
 
@@ -27,10 +27,7 @@ function createUnaTasksDiv(){
     `<h4 style="height:50px;">Tareas sin asignar</h4>
     <div id = "unaTasks" class="card-body text-center d-flex flex-column row-gap-2;">
         
-    </div>
-        <button class="btn btn-primary mb-3 mt-2" onclick="">
-        Añadir nueva tarea
-        </button> `;
+    </div> `;
     unaTasksDiv.innerHTML = html;
     unaTaskContainer.appendChild(unaTasksDiv);
     }
@@ -72,8 +69,22 @@ function createWeekDays(){
     }
 }
     
+  /**
+   * Carga la pantalla de planificación semanal de tareas
+   */
+  function loadDivTasksWeeks(){
+    loadNavBar("PLANIFICACIÓN SEMANAL");
+    let container = document.getElementById("container");
+    container.innerHTML= `<div class="row" id="tareasContainer">
+    </div>
+    <div class="sticky-xxl-bottom">       
+        <button class="btn btn-primary mb-3 mt-2" onclick="addTask()">  Añadir nueva tarea   </button>
+    </div>`;
+    modalAddTask();
+    modalDeleteTask();
+  }
 
-function loadWeeKTasks(){
+  function loadWeeKTasks(){
     createUnaTasksDiv();
     createWeekTaskDiv();
     createWeekDays();
@@ -84,6 +95,6 @@ function weekTasks(a){
     createUnaTasksDiv();
     createWeekTaskDiv();
     createWeekDays();
-    console.log(document.body);
+    fetchTasks();
   }
     

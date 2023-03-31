@@ -12,6 +12,10 @@
     let  dia = "";
 
 
+    /**
+     * constructor de tareas a partir de un json dado
+     * @param {*} task 
+     */
 
     function tasks(task) {
         this.idT = task.id;
@@ -20,8 +24,9 @@
         this.colorT = task.color;
         this.descripcionT = task.descripcion;
         this.dia = task.dia;
-        this.taskParms = JSON.stringify(task).replaceAll('"', "'"); 
-        createUnaTasksDiv();
+        this.taskParms = JSON.stringify(task).replaceAll('"', "'");         
+        if (this.dia === "") createUnaTask();
+        else createAssignedTask();
     }
     
 
@@ -35,6 +40,15 @@
         unaTaskContainer.appendChild(createTask());
     }
 
+    /**
+     * Coloca cada tarea en su area de tarea por dia id = "tareas{nombrededia}"
+     */
+    function createAssignedTask(){
+        let taskContainer = document.getElementById("tareas" + this.dia);
+        taskContainer.appendChild(createTask());    
+    }
+
+
 
     /**
      * crea un elemento tarea
@@ -43,10 +57,12 @@
     function createTask(){
         let task = document.createElement("div");
         task.setAttribute("id", "task" + this.idT);
-        task.setAttribute("style", "background-colorT:" + this.colorT);
+        task.setAttribute("style", "border: 1px solid DEE2E6;  border-radius: 18px; background-color:" + this.colorT);
         task.innerHTML = 
-        `<h5 class="p-2">${this.nombreT}</h5>                            
-        <div class="d-flex flex-row p-1 justify-content-center gap-1">
+        `<h5 class="p-2">${this.nombreT}</h5>  
+        <input type="hidden" id="diaTarea" value="${this.dia}">  
+        <input type="hidden" id="idT" value="${this.idT}">                          
+         <div class="d-flex flex-row p-1 justify-content-center gap-1">
             <button class="btn btn-primary tareas-btn" onclick="">
                 Modificar
             </button>
@@ -56,8 +72,6 @@
         </div>`;
         return task
     }
-
-    
 
     /**
      * Funcion que abre el modal de confirmación de eliminar
@@ -74,3 +88,27 @@
             deleteModal.close();
         })
       }
+
+
+
+  /**
+   * función que cargará las tarjetas obtenidas de la lectura de datos
+   * @param {*} jsonTask 
+   */
+  function loadTasks(jsonTask){
+    jsonTask.forEach(weekTask => {
+      tasks(weekTask);
+    });
+  }
+
+
+  /**
+   * incorpora los datos, en principio de un fichero json, más tarde cambiará a backend
+   */
+  function fetchTasks(){
+    fetch('../data/mocktasks.json')
+    .then((response) => response.json())
+    .then((json) => {
+      loadTasks(json);
+    });
+  }
