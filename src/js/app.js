@@ -16,7 +16,7 @@ const DEFAULT_COLOR = "#edede9";
 
   // incorpora los datos, en principio de un fichero json, más tarde cambiará a backend
   function fetchWeeks(){
-    fetch('../data/mockcards.json')
+    fetch('../src/data/mockcards.json')
     .then((response) => response.json())
     .then((json) => {
       loadWeeks(json);

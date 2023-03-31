@@ -106,7 +106,7 @@
    * incorpora los datos, en principio de un fichero json, más tarde cambiará a backend
    */
   function fetchTasks(){
-    fetch('../data/mocktasks.json')
+    fetch('../src/data/mocktasks.json')
     .then((response) => response.json())
     .then((json) => {
       loadTasks(json);
