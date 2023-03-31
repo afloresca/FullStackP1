@@ -25,7 +25,7 @@ function createUnaTasksDiv(){
     unaTasksDiv.classList.add("text-center");
     let html = 
     `<h4 style="height:50px;">Tareas sin asignar</h4>
-    <div id = "unaTasks" class="card-body text-center d-flex flex-column row-gap-2 ">
+    <div id = "unaTasks" class="card-body text-center d-flex flex-column row-gap-2;">
         
     </div>
         <button class="btn btn-primary mb-3 mt-2" onclick="">
@@ -43,12 +43,16 @@ function createWeekTaskDiv(){
     let tareaWeekDiv = document.createElement("div");
     tareaWeekDiv.classList.add("col-sm-10");
     tareaWeekDiv.setAttribute("id", "tareas-week");
-    let tareaWeekCols = document.createElement("div");
-    tareaWeekCols.classList.add("row");
-    tareaWeekCols.classList.add("column-gap-1");
-    tareaWeekCols.classList.add("text-center");
+    weekTaskContainer.appendChild(tareaWeekDiv);
+    // hay dos divs anidados
+    weekTaskContainer = document.getElementById("tareas-week");
+    tareaWeekDiv = document.createElement("div");
+    tareaWeekDiv.classList.add("row");
+    tareaWeekDiv.classList.add("column-gap-1");
+    tareaWeekDiv.classList.add("text-center");
     tareaWeekDiv.setAttribute("id", "tareas-week-cols");
     weekTaskContainer.appendChild(tareaWeekDiv);
+    console.log(weekTaskContainer);
 }
 
 function createWeekDays(){
@@ -56,10 +60,11 @@ function createWeekDays(){
 
     let dayDiv = document.createElement("div");
     for (let i = 0; i < diasId.length; i++) {
-        dayDiv.classList.add("tareas");
-        dayDiv.classList.add("d-flex");
-        dayDiv.classList.add("flex-column");
-        dayDiv.classList.add("row-gap-2");
+        dayDiv.classList.add("tareas"); 
+        dayDiv.classList.add("col-sm");
+        dayDiv.classList.add("day");
+        dayDiv.classList.add("p-0");
+        dayDiv.classList.add("pt-2");
         dayDiv.setAttribute("id", "tareas" + diasId[i]);
         dayDiv.innerHTML =  `<h4 style="height:50px;">${dias[i]}</h4>   `             
         weekDays.appendChild(dayDiv);
