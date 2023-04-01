@@ -74,7 +74,7 @@ let closeButton = document.getElementById('btnCloseWeekModal');
 
     modNombre.value = "";
     modDesc.value = "";
-    modVacaciones.value = "";
+    modVacaciones = "";
     modColor.value = DEFAULT_COLOR; 
     modal.close();
   }
