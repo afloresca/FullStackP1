@@ -66,8 +66,7 @@ let closeButton = document.getElementById('btnCloseWeekModal');
     //creamos la nueva card de semanal
     let modVacaciones = 'N';
     if (document.getElementById("vacaciones").checked) modVacaciones = 'S';
-    console.log(document.getElementById("vacaciones").checked);
-    console.log(modVacaciones);
+
     cards({"id" : modYear.Value + modNumSemana.value + "", "num_semana" : modNumSemana.value, "nombre" : modNombre.value, "color" : modColor.value, "descripcion" : modDesc.value, "year" : modYear.value, "vacaciones" : modVacaciones});
  
     // Limpiamos los valores del formulario

@@ -26,7 +26,6 @@ function allowDrop(ev) {
 
   function updateDayTaskDiv(dayId, taskId){
     let task = document.getElementById(taskId).getElementsByClassName("diaTarea")[0];
-    console.log(dayId);
     if (dayId === "unaTasks") dayId = ""; //sin asignar
     task.value = dayId; //actualizamos su dia de la semana en la div de la tarea
   }
@@ -50,6 +49,10 @@ function createUnaTasksDiv(){
     unaTasksDiv.setAttribute("ondragover", "allowDrop(event)");
     let html = 
     `<h4 style="height:50px;">Tareas sin asignar</h4>
+    
+    <div class="sticky-xxl-bottom">       
+        <button class="btn btn-primary mb-3 mt-2" onclick="addTask('unatask')">  Añadir nueva tarea   </button>
+    </div>
     <div id = "unaTasks" class="card-body text-center d-flex flex-column row-gap-2;">        
     </div> `;
     unaTasksDiv.innerHTML = html;
@@ -93,7 +96,10 @@ function createWeekDays(){
         dayDiv.setAttribute("style", `background-color: ${color}; border: 1px solid DEE2E6;  border-radius: 18px;`)
         dayDiv.setAttribute("ondrop","drop(event)");
         dayDiv.setAttribute("ondragover", "allowDrop(event)");
-        dayDiv.innerHTML =  `<h4 style="height:50px;">${dias[i]}</h4>   `             
+        dayDiv.innerHTML =  `<h4 style="height:50px;">${dias[i]}</h4> 
+        <div class="sticky-xxl-bottom">       
+            <button class="btn btn-primary mb-3 mt-2" onclick="addTask('${diasId[i]}')">  Añadir nueva tarea   </button>
+        </div>  `             
         weekDays.appendChild(dayDiv);
         dayDiv = document.createElement("div");
         if (color === DEFAULT_COLOR) color = WHT_COLOR;
@@ -109,9 +115,6 @@ function loadDivTasksWeeks(){
     loadNavBar(`PLANIFICACIÓN SEMANA ${plan.num_semana} AÑO ${plan.year}`);
     let container = document.getElementById("container");
     container.innerHTML= `<div class="row" id="tareasContainer">
-    </div>
-    <div class="sticky-xxl-bottom">       
-        <button class="btn btn-primary mb-3 mt-2" onclick="addTask()">  Añadir nueva tarea   </button>
     </div>`;
     modalAddTask();
     modalDeleteTask();
@@ -130,8 +133,18 @@ function loadDivTasksWeeks(){
  * MODAL AÑADIR NUEVA TAREA
  */
 
+let modalDia = "";
 
-function addTask(){
+function addTask(mdia){
+    nomTarea.value = "";
+    modTaskdesc.value = "";
+    modColorTarea.value = DEFAULT_TASK_COLOR;
+    modHoraI.value="00";
+    modHoraF.value="00";
+    modIdTask.value = "";
+    document.getElementById("completada").checked= false;
+    if (mdia==='unatask') mdia = "";
+    modalDia = mdia;
     modalTitle.innerHTML = "Añadir nueva tarea";
     modalAccion.value = "add";
     document.getElementById("addTarea").showModal(); //Mostrar modal añadir tareas
@@ -142,19 +155,33 @@ function addTask(){
 const btnAddTask = document.getElementById("btnAddTarea");
 const btnCloseAddTask = document.getElementById('btnCloseAddTarea');
 // Identificamos el modal.
+
 let modalTitle = document.getElementById("accionTitulo");
 let modalAccion = document.getElementById("accionT");
 let nomTarea = document.getElementById("nombre-tarea");
 let modTaskdesc = document.getElementById("taskdesc");
 let modColorTarea = document.getElementById("taskcolor");
 let modIdTask = document.getElementById("modIdTask");
+let modHoraI = document.getElementById("modHoraI");
+let modHoraF = document.getElementById("modHoraF");
 
 function verificaDatos(){
-    if (nomTarea.value === "" ||  modTaskdesc.value === "") {
+try{
+    if (nomTarea.value === "" ||  modTaskdesc.value === "" || modHoraI==="" || modHoraF==="") {
         alert("Debes rellenar todos los campos obligarorios");
         return false;
     } 
-    return true;
+    else if ( parseInt(modHoraI.value)<0 || parseInt(modHoraF.value)>24){
+        alert("Valor de hora no es correcto debe ser entre 0 y 24");
+        return false;
+    }
+    else     return true;
+}
+catch (e){
+    alert("VALOR NO VALIDO!");
+    return false;
+}
+
 }
 
 // Función que cierra el modal al pulsar el botón de cerrar
@@ -167,25 +194,31 @@ btnCloseAddTask.addEventListener('click', function(){
 //Evento que cuando clickas en el boton añadir valida los campos del modal y añade la semana si son correctos
 btnAddTask.addEventListener('click', function (){
     // Validacion de campos obligatorios
-    if (verificaDatos()) {      
+    if (verificaDatos()) {    
+        let modCompletada="N";
+        if (document.getElementById("completada").checked) modCompletada = 'S';  
         if (modalAccion.value === "add") {
-              tasks({"id" : ++numTareas + "", "idcard" : plan.id, "nombre" : nomTarea.value, "color" : modColorTarea.value, "descripcion" : modTaskdesc.value, "dia" : ""});
+              tasks({"id" : ++numTareas + "", "idcard" : plan.id, "nombre" : nomTarea.value, "color" : modColorTarea.value, "descripcion" : modTaskdesc.value, "dia" : modalDia, "completada":modCompletada, "horaI":modHoraI.value, "horaF":modHoraF.value});
             //aquí irá la llamada a función de insert en bdd de la bdd a task.js
               generateTask()   ;        //creamos la nueva tarea semanal 
         }
         else {
-            tasks({"id" : modIdTask.value + "", "idcard" : plan.id, "nombre" : nomTarea.value, "color" : modColorTarea.value, "descripcion" : modTaskdesc.value, "dia" : ""});
+            tasks({"id" : modIdTask.value + "", "idcard" : plan.id, "nombre" : nomTarea.value, "color" : modColorTarea.value, "descripcion" : modTaskdesc.value, "dia" : modalDia, "completada":modCompletada, "horaI":modHoraI.value, "horaF":modHoraF.value});
             //aquí irá la llamada a función de actualización de la bdd en task.js
             updateTaskDiv();
+
         }
-                
-        // Limpiamos los valores del formulario    
+            // Limpiamos los valores del formulario    
         nomTarea.value = "";
         modTaskdesc.value = "";
+        modHoraI.value="";
+        modHoraF.value="";
         modColorTarea.value = DEFAULT_TASK_COLOR; 
-        document.getElementById("addTarea").close(); //CIERRA MODAL
+        document.getElementById("addTarea").close(); //CIERRA MODAL   
+
     }
-    }
+
+}
 );
         
 /**
@@ -201,9 +234,13 @@ function updateTask(taskJson){
     nomTarea.value = taskJson.nombre;
     modTaskdesc.value = taskJson.descripcion;
     modColorTarea.value = taskJson.color; 
+    modHoraI.value=taskJson.horaI;
+    modHoraF.value=taskJson.horaF;
     modalTitle.innerHTML = "Actualizar tarea";
     modalAccion.value = "update";
     modIdTask.value = taskJson.id; //guardaremos la idTask para actulizar la tarjetilla de tarea
+    if (taskJson.completada==="S") document.getElementById("completada").checked= true;
+    else document.getElementById("completada").checked= false;
     document.getElementById("addTarea").showModal(); //Mostrar modal añadir tareas
 }
 
