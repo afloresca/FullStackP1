@@ -1,6 +1,6 @@
 
     /**
-     * JS con funciones para gestionar las tareas de la semana
+     * JS con funciones para crear las tareas de la semana
      */
 
     // variables de las tareas
@@ -14,7 +14,7 @@
     let numTareas = 0;
 
     /**
-     * constructor de tareas a partir de un json dado
+     * constructor de tarea a partir de un json dado
      * @param {*} task 
      */
 
@@ -44,10 +44,10 @@
     }
 
     /**
-     * Coloca cada tarea en su area de tarea por dia id = "tareas{nombrededia}"
+     * Coloca cada tarea en su area de tarea por dia id = "{nombrededia}"
      */
     function createAssignedTask(){
-        let taskContainer = document.getElementById("tareas" + this.dia);
+        let taskContainer = document.getElementById(this.dia);
         taskContainer.appendChild(createTask());    
     }
 
@@ -62,14 +62,24 @@
     function createTask(){
         let task = document.createElement("div");
         task.setAttribute("id", this.getTaskDivId());
+        task.setAttribute("draggable","true"); 
         task.setAttribute("style", "border: 1px solid DEE2E6;  border-radius: 18px; background-color:" + this.colorT);
         task.innerHTML = getTaskHtml();
+
+        task.addEventListener("dragstart", (ev) => {
+          ev.target.classList.add("dragging"); //que e haga semitransparente
+          ev.dataTransfer.setData("text", ev.target.id); //para recuperar el id del div de la tarea
+          });
+
+        task.addEventListener("dragend", (event) => {
+             event.target.classList.remove("dragging"); //que vuelva a ser normal y que pasen cosas
+        });
         return task
     }
 
     function getTaskHtml(){
       let html= `<h5 class="p-2">${this.nombreT}</h5>  
-      <input type="hidden" id="diaTarea" value="${this.dia}">  
+      <input type="hidden" id="diaTarea" class="diaTarea" value="${this.dia}">  
       <input type="hidden" id="idT" value="${this.idtask}"> 
       <input type="hidden" id="diaTarea" value="${this.descripcionT}">  
       <input type="hidden" id="idT" value="${this.idT}">                          
@@ -113,6 +123,8 @@
       loadTasks(json);
     });
   }
+
+
 /**
  * Se encarga de 
  * @param {*} plan

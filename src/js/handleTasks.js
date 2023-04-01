@@ -1,7 +1,7 @@
-//document.getElementById('modifyTarea').showModal(); //Mostrar modal modificación tareas
-//
-//document.getElementById('deleteTarea').showModal(); //Mostrar modal eliminar tareas
-
+/**
+ * JS para crear el panel de semanal y gestionar eventos y cosas que pasen.
+ * (como llamadas a modal, drag and drops y vete tu a saber)
+ */
 
 
 // variables de control
@@ -9,6 +9,27 @@
 let diasId = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"];
 let dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
+function allowDrop(ev) {
+    ev.preventDefault();
+  }
+  
+  function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+  
+  function drop(ev) {
+    ev.preventDefault();
+    var taskId = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(taskId));
+    updateDayTaskDiv(ev.target.id, taskId);
+  }
+
+  function updateDayTaskDiv(dayId, taskId){
+    let task = document.getElementById(taskId).getElementsByClassName("diaTarea")[0];
+    console.log(dayId);
+    if (dayId === "unaTasks") dayId = ""; //sin asignar
+    task.value = dayId; //actualizamos su dia de la semana en la div de la tarea
+  }
 
 /**
  *  Container Tareas sin asignar  
@@ -24,6 +45,8 @@ function createUnaTasksDiv(){
     unaTasksDiv.classList.add("flex-column");
     unaTasksDiv.classList.add("justify-content-around");
     unaTasksDiv.classList.add("text-center");
+    unaTasksDiv.setAttribute("ondrop","drop(event)");
+    unaTasksDiv.setAttribute("ondragover", "allowDrop(event)");
     let html = 
     `<h4 style="height:50px;">Tareas sin asignar</h4>
     <div id = "unaTasks" class="card-body text-center d-flex flex-column row-gap-2;">        
@@ -51,6 +74,9 @@ function createWeekTaskDiv(){
     weekTaskContainer.appendChild(tareaWeekDiv);
 }
 
+/**
+ * crea los divs contenedores para cada día de la semana
+ */
 function createWeekDays(){
     let weekDays = document.getElementById("tareas-week-cols");
     let dayDiv = document.createElement("div");
@@ -62,14 +88,17 @@ function createWeekDays(){
         dayDiv.classList.add("p-0");
         dayDiv.classList.add("pt-2");
         dayDiv.classList.add("vh-100");
-        dayDiv.setAttribute("id", "tareas" + diasId[i]);
+        dayDiv.setAttribute("id", diasId[i]);
         dayDiv.setAttribute("style", `background-color: ${color}; border: 1px solid DEE2E6;  border-radius: 18px;`)
+        dayDiv.setAttribute("ondrop","drop(event)");
+        dayDiv.setAttribute("ondragover", "allowDrop(event)");
         dayDiv.innerHTML =  `<h4 style="height:50px;">${dias[i]}</h4>   `             
         weekDays.appendChild(dayDiv);
         dayDiv = document.createElement("div");
         if (color === DEFAULT_COLOR) color = WHT_COLOR;
         else color = DEFAULT_COLOR;
     }
+
 }
     
   /**
@@ -140,13 +169,12 @@ btnAddTask.addEventListener('click', function (){
     if (verificaDatos()) {      
         if (modalAccion.value === "add") {
               tasks({"id" : ++numTareas + "", "idcard" : plan.id, "nombre" : nomTarea.value, "color" : modColorTarea.value, "descripcion" : modTaskdesc.value, "dia" : ""});
+            //aquí irá la llamada a función de insert en bdd de la bdd a task.js
               generateTask()   ;        //creamos la nueva tarea semanal 
         }
         else {
-            //actualiza datos tasks cuando haya backend 
-            // updateTask({"id" : ++numTareas + "", "idcard" : plan.id, "nombre" : nomTarea.value, "color" : modColorTarea.value, "descripcion" : modTaskdesc.value, "dia" : ""});
-            //actualiza div
             tasks({"id" : modIdTask.value + "", "idcard" : plan.id, "nombre" : nomTarea.value, "color" : modColorTarea.value, "descripcion" : modTaskdesc.value, "dia" : ""});
+            //aquí irá la llamada a función de actualización de la bdd en task.js
             updateTaskDiv();
         }
                 
