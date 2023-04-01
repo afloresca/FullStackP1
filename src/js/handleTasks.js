@@ -142,7 +142,7 @@ function addTask(mdia){
     modHoraI.value="00";
     modHoraF.value="00";
     modIdTask.value = "";
-    document.getElementById("completada").checked= false;
+    document.getElementById("modCompletada").checked = false;
     if (mdia==='unatask') mdia = "";
     modalDia = mdia;
     modalTitle.innerHTML = "Añadir nueva tarea";
@@ -196,7 +196,10 @@ btnAddTask.addEventListener('click', function (){
     // Validacion de campos obligatorios
     if (verificaDatos()) {    
         let modCompletada="N";
-        if (document.getElementById("completada").checked) modCompletada = 'S';  
+        if (document.getElementById("modCompletada").checked) {
+            modCompletada = 'S';
+            console.log(modCompletada)
+        }   
         if (modalAccion.value === "add") {
               tasks({"id" : ++numTareas + "", "idcard" : plan.id, "nombre" : nomTarea.value, "color" : modColorTarea.value, "descripcion" : modTaskdesc.value, "dia" : modalDia, "completada":modCompletada, "horaI":modHoraI.value, "horaF":modHoraF.value});
             //aquí irá la llamada a función de insert en bdd de la bdd a task.js

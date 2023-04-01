@@ -178,8 +178,8 @@ function modalAddTaskHtml(){
       </div>
       <div class="form-group">
         <div class="col-sm-10">
-        <label for="completada" class="col-form-label">Tarea Completada</label>
-          <input type="checkbox" id="completada" name="completada" value="N">
+        <label for="modCompletada" class="col-form-label">Tarea Completada</label>
+          <input type="checkbox" id="modCompletada" name="completada">
         </div
         <label for="modHoraI" class="col-form-label"><strong style="color: red;">*</strong>Hora Inicio</label>
         <input type="text" id="modHoraI" min="0" max="24" value="0" class="form-control">
