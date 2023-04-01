@@ -14,13 +14,13 @@ function allowDrop(ev) {
   }
   
   function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
+    ev.dataTransfer.setData("text", ev.currentTarget.id);
   }
   
   function drop(ev) {
     ev.preventDefault();
     var taskId = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(taskId));
+    ev.currentTarget.appendChild(document.getElementById(taskId));
     updateDayTaskDiv(ev.target.id, taskId);
   }
 
@@ -39,11 +39,12 @@ function createUnaTasksDiv(){
     let unaTasksDiv = document.createElement("div");
     unaTasksDiv.setAttribute("id","tareas-sin-asignar");
     unaTasksDiv.setAttribute("style","background-color: #edede9; border: 1px solid DEE2E6;  border-radius: 18px;");
-    unaTasksDiv.classList.add("col-sm-2"); 
-    unaTasksDiv.classList.add("p-2");
-    unaTasksDiv.classList.add("d-flex");
-    unaTasksDiv.classList.add("flex-column");
-    unaTasksDiv.classList.add("justify-content-around");
+    unaTasksDiv.classList.add("tareas"); 
+    unaTasksDiv.classList.add("col-sm");
+    unaTasksDiv.classList.add("day");
+    unaTasksDiv.classList.add("p-0");
+    unaTasksDiv.classList.add("pt-2");
+    unaTasksDiv.classList.add("vh-100");
     unaTasksDiv.classList.add("text-center");
     unaTasksDiv.setAttribute("ondrop","drop(event)");
     unaTasksDiv.setAttribute("ondragover", "allowDrop(event)");
@@ -107,7 +108,7 @@ function createWeekDays(){
 function loadDivTasksWeeks(){
     loadNavBar(`PLANIFICACIÓN SEMANA ${plan.num_semana} AÑO ${plan.year}`);
     let container = document.getElementById("container");
-    container.innerHTML= `<div class="row vh-100" id="tareasContainer">
+    container.innerHTML= `<div class="row" id="tareasContainer">
     </div>
     <div class="sticky-xxl-bottom">       
         <button class="btn btn-primary mb-3 mt-2" onclick="addTask()">  Añadir nueva tarea   </button>
