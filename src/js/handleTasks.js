@@ -175,7 +175,11 @@ try{
         alert("Valor de hora no es correcto debe ser entre 0 y 24");
         return false;
     }
-    else     return true;
+    else if ( parseInt(modHoraI.value) > (modHoraF.value)){
+        alert("La hora inicial no puede ser mayor que la final");
+        return false;
+    }
+    else       return true;
 }
 catch (e){
     alert("VALOR NO VALIDO!");
