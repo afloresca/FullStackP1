@@ -173,9 +173,20 @@ function modalAddTaskHtml(){
         <input type="text" class="form-control" id="taskdesc" required>
       </div>
       <div class="form-group">
-      <label for="taskcolor" class="col-form-label"><strong style="color: red;">*</strong>Seleciona Color</span>
-      <input type="color" class="form-select border border-1"  id="taskcolor" value = "${DEFAULT_TASK_COLOR}" required> 
-    </div>
+        <label for="taskcolor" class="col-form-label"><strong style="color: red;">*</strong>Seleciona Color</span>
+        <input type="color" class="form-select border border-1"  id="taskcolor" value = "${DEFAULT_TASK_COLOR}" required> 
+      </div>
+      <div class="form-group">
+        <div class="col-sm-10">
+        <label for="modCompletada" class="col-form-label">Tarea Completada</label>
+          <input type="checkbox" id="modCompletada" name="completada">
+        </div
+        <label for="modHoraI" class="col-form-label"><strong style="color: red;">*</strong>Hora Inicio</label>
+        <input type="text" id="modHoraI" min="0" max="24" value="0" class="form-control">
+        <label for="modHoraF" class="col-form-label"><strong style="color: red;">*</strong>Hora Final</label>
+        <input type="text" id="modHoraF" min="0" max="24" value="0" class="form-control">
+      </div>      
+
     </form>
     <div class="modal-footer pt-2 d-flex gap-2">
       <button type="button" class="btn btn-secondary" id="btnCloseAddTarea">Cerrar</button>

@@ -10,6 +10,9 @@
     let  colorT = "";
     let  descripcionT = "";
     let  dia = "";
+    let completada="";
+    let horaI=""; 
+    let horaF=""
     let plan; //datos de la card
     let numTareas = 0;
 
@@ -25,6 +28,9 @@
         this.colorT = task.color;
         this.descripcionT = task.descripcion;
         this.dia = task.dia;
+        this.completada = task.completada;
+        this.horaF = task.horaF;
+        this.horaI = task.horaI;
         this.taskParms = JSON.stringify(task).replaceAll('"', "'");         
     }
     
@@ -81,8 +87,11 @@
       let html= `<h5 class="p-2">${this.nombreT}</h5>  
       <input type="hidden" id="diaTarea" class="diaTarea" value="${this.dia}">  
       <input type="hidden" id="idT" value="${this.idtask}"> 
-      <input type="hidden" id="diaTarea" value="${this.descripcionT}">  
-      <input type="hidden" id="idT" value="${this.idT}">                          
+      <input type="hidden" id="descTarea" value="${this.descripcionT}">  
+      <input type="hidden" id="idT" value="${this.idT}">      
+      <input type="hidden" id="completada" value="${this.completada}">   
+      <input type="hidden" id="horaI" value="${this.horaI}"> 
+      <input type="hidden" id="horaF" value="${this.horaF}">                          
        <div class="d-flex flex-row p-1 justify-content-center gap-1">
           <button class="btn btn-primary tareas-btn" onclick="updateTask(${this.taskParms})">
               Modificar
