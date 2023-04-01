@@ -97,7 +97,7 @@ function modalAddWeekHtml(){
       <div class="form-group">
         <div class="col-sm-10">
         <label for="vacaciones" class="col-form-label">Semana de Vacaciones</label>
-          <input type="checkbox" id="vacaciones" name="vacaciones" value="S">
+          <input type="checkbox" id="vacaciones" name="vacaciones" value="N">
         </div
         <label for="numSemana" class="col-form-label"><strong style="color: red;">*</strong>Número Semana</label>
         <input type="numSemana" id="numSemana" min="1" max="${new Date().getMaxWeeksPerYear()}" step="1" value="${new Date().getWeekNumber()}" class="form-control" id="numSem-add">
@@ -169,7 +169,7 @@ function modalAddTaskHtml(){
         <input type="text" class="form-control" id="nombre-tarea" required>
       </div>
       <div class="form-group">
-        <label for="taskdesc" class="col-form-label">Descripción:</label>
+        <label for="taskdesc" class="col-form-label"><strong style="color: red;">*</strong>Descripción:</label>
         <input type="text" class="form-control" id="taskdesc" required>
       </div>
       <div class="form-group">
